@@ -2,7 +2,7 @@
   "name": "myflix-client-react",
   "version": "1.0.0",
   "description": "myFlix-client-REACT",
-  "main": "src/index.html",
+  "source": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/sb-olr/myFlix-client-REACT/issues"
   },
-  "homepage": "https://github.com/sb-olr/myFlix-client-REACT#readme"
+  "homepage": "https://github.com/sb-olr/myFlix-client-REACT#readme",
+  "dependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
 }
