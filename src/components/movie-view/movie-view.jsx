@@ -7,7 +7,7 @@ export class MovieView extends React.Component {
     return (
       <div className="movie-view">
         <div className="movie-poster">
-          <img src={movie.ImagePath} alt="movie poster"/>
+          <img src={movie.ImagePath} alt="movie poster" crossOrigin="*" width={500} />
         </div>
         <div className="movie-title">
           <span className="label">Title: </span>
@@ -17,7 +17,7 @@ export class MovieView extends React.Component {
           <span className="label">Description: </span>
           <span className="value">{movie.Description}</span>
         </div>
-            <button onClick={() => onBackClick(null)}>Back</button>
+        <button onClick={() => onBackClick(null)}>Back</button>
       </div>
     );
   }

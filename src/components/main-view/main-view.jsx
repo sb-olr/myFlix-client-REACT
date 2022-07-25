@@ -26,7 +26,7 @@ class MainView extends React.Component {
           ReleaseYear: "1994",
           Rating: "R",
           ImagePath:
-            "https://www.themoviedb.org/t/p/w1280/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+            "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
           Featured: true,
         },
         {
@@ -48,7 +48,7 @@ class MainView extends React.Component {
           ReleaseYear: "1972",
           Rating: "R",
           ImagePath:
-            "https://www.themoviedb.org/t/p/w1280/n6PvMAKL66gavIFxOyRB6czAeQO.jpg",
+            "https://image.tmdb.org/t/p/w500/n6PvMAKL66gavIFxOyRB6czAeQO.jpg",
           Featured: true,
         },
         {
@@ -70,7 +70,7 @@ class MainView extends React.Component {
           ReleaseYear: "2008",
           Rating: "R-13",
           ImagePath:
-            "https://www.themoviedb.org/t/p/w1280/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+            "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
           Featured: true,
         },
       ],
