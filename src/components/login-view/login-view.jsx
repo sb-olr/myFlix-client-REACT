@@ -28,7 +28,7 @@ export function LoginView(props) {
         <input
           type="password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={e => setPassword(e.target.value)}
         />
       </label>
 
