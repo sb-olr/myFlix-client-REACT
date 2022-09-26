@@ -7,6 +7,7 @@ import { LoginView } from "../login-view/login-view";
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from "../movie-view/movie-view";
 
+const API_URL = "https://myflixnow-app.herokuapp.com";
 class MainView extends React.Component {
   constructor() {
     super();
@@ -19,13 +20,13 @@ class MainView extends React.Component {
 
   componentDidMount() {
     axios
-      .get("https://myflixnow-app.herokuapp.com/movies")
-      .then(response => {
+      .get(API_URL+'/movies')
+      .then((response) => {
         this.setState({
           movies: response.data,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
@@ -38,45 +39,66 @@ class MainView extends React.Component {
   }
 
   /* When a user successfully logs in, this function updates the `user` property in state to that *particular user*/
-  onLoggedIn(user) {
+  onLoggedIn(authData) {
+    console.log(authData);
     this.setState({
-      user,
+      user: authData.user.Username,
     });
+
+    localStorage.setItem("token", authData.token);
+    localStorage.setItem("user", authData.user.Username);
+    this.getMovies(authData.token);
   }
+
+getMovies(token) {
+  axios.get(API_URL, {
+    headers: { Authorization: `Bearer ${token}`}
+  })
+  .then(response => {
+    // Assign the result to the state
+    this.setState({
+      movies: response.data
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
   render() {
     const { movies, selectedMovie, user } = this.state;
 
     /* If there is no user, the LoginView is rendered. If there is a user logged in, the user details are *passed as a prop to the LoginView*/
     if (!user)
-      return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
     // Before the movies have been loaded
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
       <Row className="main-view justify-content-md-center">
-          {/*If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
-          {selectedMovie ? (
-            <Col md={8}>
-              <MovieView
-                movie={selectedMovie}
-                onBackClick={(newSelectedMovie) => {
-                  this.setSelectedMovie(newSelectedMovie);
-                }}
+        {/*If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
+        {selectedMovie ? (
+          <Col md={8}>
+            <MovieView
+              movie={selectedMovie}
+              onBackClick={(newSelectedMovie) => {
+                this.setSelectedMovie(newSelectedMovie);
+              }}
+            />
+          </Col>
+        ) : (
+          movies.map((movie) => (
+            <Col md={3}>
+              <MovieCard
+                key={movie._id}
+                movie={movie}
+                onMovieClick={(movie) => this.setSelectedMovie(movie)}
               />
             </Col>
-          ) : (
-            movies.map((movie) => (
-              <Col md={3}>
-                <MovieCard
-                  key={movie._id}
-                  movie={movie}
-                  onMovieClick={(movie) => this.setSelectedMovie(movie)}
-                />
-              </Col>
-            ))
-          )}
-        </Row>
+          ))
+        )}
+      </Row>
     );
   }
 }
