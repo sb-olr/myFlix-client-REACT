@@ -13,7 +13,7 @@ const handleSubmit = (e) => {
   e.preventDefault();
   /* Send a request to the server for authentication */
   axios
-    .post(`{$API_URL}/login`, {
+    .post("https://myflixnow-app.herokuapp.com/login", {
       Username: username,
       Password: password,
     })
@@ -22,7 +22,8 @@ const handleSubmit = (e) => {
       props.onLoggedIn(data);
     })
     .catch((e) => {
-      console.log("no such user");
+      console.log(e);
+      // console.log("no such user");
     });
 };
 
